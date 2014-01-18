@@ -9,11 +9,14 @@
 #import "Table.h"
 
 @implementation Table
+
 @synthesize lastWin;
+
 Deck* deck;
 NSMutableArray* players;
 NSMutableArray* blind;
 NSMutableArray* currentPlay;
+
 - (id)init:(NSString*) name
 {
     self = [super init];

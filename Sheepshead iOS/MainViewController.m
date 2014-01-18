@@ -1,8 +1,7 @@
-#import "HostViewController.h"
 #import "MainViewController.h"
 #import "UIFont+SnapAdditions.h"
 #import "UIButton+SnapAdditions.h"
-#import "Game.h"
+#import "Table.h"
 
 
 @interface MainViewController ()
@@ -12,9 +11,8 @@
 @property (nonatomic, weak) IBOutlet UIImageView *pImageView;
 @property (nonatomic, weak) IBOutlet UIImageView *jokerImageView;
 
-@property (nonatomic, weak) IBOutlet UIButton *hostGameButton;
-@property (nonatomic, weak) IBOutlet UIButton *joinGameButton;
 @property (nonatomic, weak) IBOutlet UIButton *singlePlayerGameButton;
+
 @end
 
 @implementation MainViewController
@@ -28,8 +26,6 @@
 @synthesize pImageView = _pImageView;
 @synthesize jokerImageView = _jokerImageView;
 
-@synthesize hostGameButton = _hostGameButton;
-@synthesize joinGameButton = _joinGameButton;
 @synthesize singlePlayerGameButton = _singlePlayerGameButton;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -46,76 +42,70 @@
 	return UIInterfaceOrientationIsLandscape(interfaceOrientation);
 }
 
-- (IBAction)hostGameAction:(id)sender
-{
-	if (_buttonsEnabled)
-	{
-		[self performExitAnimationWithCompletionBlock:^(BOOL finished)
-         {
-             HostViewController *controller = [[HostViewController alloc] initWithNibName:@"HostViewController" bundle:nil];
-             controller.delegate = self;
-             
-             [self presentViewController:controller animated:NO completion:nil];
-         }];
-	}
-}
+//- (IBAction)hostGameAction:(id)sender
+//{
+//	if (_buttonsEnabled)
+//	{
+//		[self performExitAnimationWithCompletionBlock:^(BOOL finished)
+//         {
+//             HostViewController *controller = [[HostViewController alloc] initWithNibName:@"HostViewController" bundle:nil];
+//             controller.delegate = self;
+//             
+//             [self presentViewController:controller animated:NO completion:nil];
+//         }];
+//	}
+//}
 
 #pragma mark - GameViewControllerDelegate
 
-- (void)gameViewController:(GameViewController *)controller didQuitWithReason:(QuitReason)reason
+- (void)gameViewController:(GameViewController *)controller
 {
-	[self dismissViewControllerAnimated:NO completion:^
-     {
-         if (reason == QuitReasonConnectionDropped)
-         {
-             [self showDisconnectedAlert];
-         }
-     }];
+	[self dismissViewControllerAnimated:NO];
 }
 
-#pragma mark - HostViewControllerDelegate
+//#pragma mark - HostViewControllerDelegate
+//
+//- (void)hostViewControllerDidCancel:(HostViewController *)controller
+//{
+//	[self dismissViewControllerAnimated:NO completion:nil];
+//}
+//
+//- (void)hostViewController:(HostViewController *)controller didEndSessionWithReason:(QuitReason)reason
+//{
+//	if (reason == QuitReasonNoNetwork)
+//	{
+//		[self showNoNetworkAlert];
+//	}
+//}
+//
+//- (void)hostViewController:(HostViewController *)controller startGameWithSession:(GKSession *)session playerName:(NSString *)name clients:(NSArray *)clients
+//{
+//	_performAnimations = NO;
+//    
+//	[self dismissViewControllerAnimated:NO completion:^
+//     {
+//         _performAnimations = YES;
+//         
+//         [self startGameWithBlock:^(Game *game)
+//          {
+//              [game startServerGameWithSession:session playerName:name clients:clients];
+//          }];
+//     }];
+//}
 
-- (void)hostViewControllerDidCancel:(HostViewController *)controller
-{
-	[self dismissViewControllerAnimated:NO completion:nil];
-}
-
-- (void)hostViewController:(HostViewController *)controller didEndSessionWithReason:(QuitReason)reason
-{
-	if (reason == QuitReasonNoNetwork)
-	{
-		[self showNoNetworkAlert];
-	}
-}
-
-- (void)hostViewController:(HostViewController *)controller startGameWithSession:(GKSession *)session playerName:(NSString *)name clients:(NSArray *)clients
-{
-	_performAnimations = NO;
-    
-	[self dismissViewControllerAnimated:NO completion:^
-     {
-         _performAnimations = YES;
-         
-         [self startGameWithBlock:^(Game *game)
-          {
-              [game startServerGameWithSession:session playerName:name clients:clients];
-          }];
-     }];
-}
-
-- (IBAction)joinGameAction:(id)sender
-{
-	if (_buttonsEnabled)
-	{
-		[self performExitAnimationWithCompletionBlock:^(BOOL finished)
-         {
-             JoinViewController *controller = [[JoinViewController alloc] initWithNibName:@"JoinViewController" bundle:nil];
-             controller.delegate = self;
-             
-             [self presentViewController:controller animated:NO completion:nil];
-         }];
-	}
-}
+//- (IBAction)joinGameAction:(id)sender
+//{
+//	if (_buttonsEnabled)
+//	{
+//		[self performExitAnimationWithCompletionBlock:^(BOOL finished)
+//         {
+//             JoinViewController *controller = [[JoinViewController alloc] initWithNibName:@"JoinViewController" bundle:nil];
+//             controller.delegate = self;
+//             
+//             [self presentViewController:controller animated:NO completion:nil];
+//         }];
+//	}
+//}
 
 - (void)startGameWithBlock:(void (^)(Game *))block
 {
@@ -351,4 +341,6 @@
      }];
 }
 
+- (IBAction)playButton:(id)sender {
+}
 @end
