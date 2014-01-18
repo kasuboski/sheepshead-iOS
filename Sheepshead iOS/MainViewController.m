@@ -1,7 +1,7 @@
 #import "MainViewController.h"
 #import "UIFont+SnapAdditions.h"
 #import "UIButton+SnapAdditions.h"
-#import "Table.h"
+#import "Game.h"
 
 
 @interface MainViewController ()
@@ -58,9 +58,15 @@
 
 #pragma mark - GameViewControllerDelegate
 
-- (void)gameViewController:(GameViewController *)controller
+- (void)gameViewController:(GameViewController *)controller didQuitWithReason:(QuitReason)reason
 {
-	[self dismissViewControllerAnimated:NO];
+	[self dismissViewControllerAnimated:NO completion:^
+     {
+         if (reason == QuitReasonConnectionDropped)
+         {
+             [self showDisconnectedAlert];
+         }
+     }];
 }
 
 //#pragma mark - HostViewControllerDelegate
@@ -114,34 +120,35 @@
     
 	[self presentViewController:gameViewController animated:NO completion:^
      {
-         Game *game = [[Game alloc] init];
+         //need to allow user to enter name
+         Game *game = [[Game alloc] init: @"Josh"];
          gameViewController.game = game;
          game.delegate = gameViewController;
          block(game);
      }];
 }
 
-#pragma mark - JoinViewControllerDelegate
-
-- (void)joinViewControllerDidCancel:(JoinViewController *)controller
-{
-	[self dismissViewControllerAnimated:NO completion:nil];
-}
-
-- (void)joinViewController:(JoinViewController *)controller didDisconnectWithReason:(QuitReason)reason
-{
-	if (reason == QuitReasonNoNetwork)
-	{
-		[self showNoNetworkAlert];
-	}
-	else if (reason == QuitReasonConnectionDropped)
-	{
-		[self dismissViewControllerAnimated:NO completion:^
-         {
-             [self showDisconnectedAlert];
-         }];
-	}
-}
+//#pragma mark - JoinViewControllerDelegate
+//
+//- (void)joinViewControllerDidCancel:(JoinViewController *)controller
+//{
+//	[self dismissViewControllerAnimated:NO completion:nil];
+//}
+//
+//- (void)joinViewController:(JoinViewController *)controller didDisconnectWithReason:(QuitReason)reason
+//{
+//	if (reason == QuitReasonNoNetwork)
+//	{
+//		[self showNoNetworkAlert];
+//	}
+//	else if (reason == QuitReasonConnectionDropped)
+//	{
+//		[self dismissViewControllerAnimated:NO completion:^
+//         {
+//             [self showDisconnectedAlert];
+//         }];
+//	}
+//}
 
 - (void)showNoNetworkAlert
 {
@@ -167,20 +174,20 @@
 	[alertView show];
 }
 
-- (void)joinViewController:(JoinViewController *)controller startGameWithSession:(GKSession *)session playerName:(NSString *)name server:(NSString *)peerID
-{
-	_performAnimations = NO;
-    
-	[self dismissViewControllerAnimated:NO completion:^
-     {
-         _performAnimations = YES;
-         
-         [self startGameWithBlock:^(Game *game)
-          {
-              [game startClientGameWithSession:session playerName:name server:peerID];
-          }];
-     }];
-}
+//- (void)joinViewController:(JoinViewController *)controller startGameWithSession:(GKSession *)session playerName:(NSString *)name server:(NSString *)peerID
+//{
+//	_performAnimations = NO;
+//    
+//	[self dismissViewControllerAnimated:NO completion:^
+//     {
+//         _performAnimations = YES;
+//         
+//         [self startGameWithBlock:^(Game *game)
+//          {
+//              [game startClientGameWithSession:session playerName:name server:peerID];
+//          }];
+//     }];
+//}
 
 - (IBAction)singlePlayerGameAction:(id)sender
 {
@@ -200,21 +207,21 @@
 {
 	[super viewDidLoad];
     
-	[self.hostGameButton rw_applySnapStyle];
-	[self.joinGameButton rw_applySnapStyle];
+//	[self.hostGameButton rw_applySnapStyle];
+//	[self.joinGameButton rw_applySnapStyle];
 	[self.singlePlayerGameButton rw_applySnapStyle];
 }
 
 - (void)prepareForIntroAnimation
 {
-	self.sImageView.hidden = YES;
-	self.nImageView.hidden = YES;
-	self.aImageView.hidden = YES;
-	self.pImageView.hidden = YES;
-	self.jokerImageView.hidden = YES;
+//	self.sImageView.hidden = YES;
+//	self.nImageView.hidden = YES;
+//	self.aImageView.hidden = YES;
+//	self.pImageView.hidden = YES;
+//	self.jokerImageView.hidden = YES;
     
-    self.hostGameButton.alpha = 0.0f;
-	self.joinGameButton.alpha = 0.0f;
+//    self.hostGameButton.alpha = 0.0f;
+//	self.joinGameButton.alpha = 0.0f;
 	self.singlePlayerGameButton.alpha = 0.0f;
     
 	_buttonsEnabled = NO;
@@ -263,8 +270,8 @@
                         options:UIViewAnimationOptionCurveEaseOut
                      animations:^
      {
-         self.hostGameButton.alpha = 1.0f;
-         self.joinGameButton.alpha = 1.0f;
+//         self.hostGameButton.alpha = 1.0f;
+//         self.joinGameButton.alpha = 1.0f;
          self.singlePlayerGameButton.alpha = 1.0f;
      }
                      completion:^(BOOL finished)
@@ -333,8 +340,8 @@
                              options:UIViewAnimationOptionCurveEaseOut
                           animations:^
           {
-              self.hostGameButton.alpha = 0.0f;
-              self.joinGameButton.alpha = 0.0f;
+//              self.hostGameButton.alpha = 0.0f;
+//              self.joinGameButton.alpha = 0.0f;
               self.singlePlayerGameButton.alpha = 0.0f;
           }
                           completion:nil];

@@ -32,6 +32,18 @@ NSMutableArray* currentPlay;
     }
     return self;
 }
+
+- (void)startSinglePlayerGame
+{
+    [self reset];
+    [self playHand];
+    
+	[self beginGame];
+}
+- (Player *)playerAtPosition:(PlayerPosition)position
+{
+        
+}
 -(void) deterWin {
     int hRank = 0; //highest rank in trick
     int curSuit = -1; //-1 = trump
@@ -156,5 +168,32 @@ NSMutableArray* currentPlay;
             break;
         }
     }
+}
+
+- (void)quitGameWithReason:(QuitReason)reason
+{
+    //cancel scheduled tasks
+    [NSObject cancelPreviousPerformRequestsWithTarget:self];
+//	_state = GameStateQuitting;
+    
+//	if (reason == QuitReasonUserQuit && ![self isSinglePlayerGame])
+//	{
+//		if (self.isServer)
+//		{
+//			Packet *packet = [Packet packetWithType:PacketTypeServerQuit];
+//			[self sendPacketToAllClients:packet];
+//		}
+//		else
+//		{
+//			Packet *packet = [Packet packetWithType:PacketTypeClientQuit];
+//			[self sendPacketToServer:packet];
+//		}
+//	}
+    
+//	[_session disconnectFromAllPeers];
+//	_session.delegate = nil;
+//	_session = nil;
+    
+	[self.delegate game:self didQuitWithReason:reason];
 }
 @end

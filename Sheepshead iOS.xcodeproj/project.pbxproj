@@ -718,8 +718,6 @@
 				582D4AF9187F5DAA00A19D60 /* Views */,
 				582D4AEE187F5B9A00A19D60 /* View Controllers */,
 				582D4AFA187F5DBE00A19D60 /* Categories */,
-				5835D03B1877773F007C4F3C /* AppDelegate.h */,
-				5835D03C1877773F007C4F3C /* AppDelegate.m */,
 				5835D03E1877773F007C4F3C /* Images.xcassets */,
 				5835D0331877773F007C4F3C /* Supporting Files */,
 				5800DEC0187F60B30035DBAB /* Images */,
@@ -731,6 +729,8 @@
 		5835D0331877773F007C4F3C /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				5835D03B1877773F007C4F3C /* AppDelegate.h */,
+				5835D03C1877773F007C4F3C /* AppDelegate.m */,
 				5800DEA9187F5FB20035DBAB /* Action_Man.ttf */,
 				5835D0341877773F007C4F3C /* Sheepshead iOS-Info.plist */,
 				5835D0351877773F007C4F3C /* InfoPlist.strings */,

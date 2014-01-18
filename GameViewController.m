@@ -13,7 +13,6 @@
 #import "Card.h"
 #import "CardView.h"
 #import "Player.h"
-#import "Stack.h"
 
 @interface GameViewController ()
 
@@ -38,11 +37,8 @@
 
 @synthesize backgroundImageView = _backgroundImageView;
 @synthesize cardContainerView = _cardContainerView;
-@synthesize turnOverButton = _turnOverButton;
-@synthesize snapButton = _snapButton;
+
 @synthesize nextRoundButton = _nextRoundButton;
-@synthesize wrongSnapImageView = _wrongSnapImageView;
-@synthesize correctSnapImageView = _correctSnapImageView;
 
 @synthesize playerNameBottomLabel = _playerNameBottomLabel;
 @synthesize playerNameLeftLabel = _playerNameLeftLabel;
@@ -58,11 +54,6 @@
 @synthesize playerActiveLeftImageView = _playerActiveLeftImageView;
 @synthesize playerActiveTopImageView = _playerActiveTopImageView;
 @synthesize playerActiveRightImageView = _playerActiveRightImageView;
-
-@synthesize snapIndicatorBottomImageView = _snapIndicatorBottomImageView;
-@synthesize snapIndicatorLeftImageView = _snapIndicatorLeftImageView;
-@synthesize snapIndicatorTopImageView = _snapIndicatorTopImageView;
-@synthesize snapIndicatorRightImageView = _snapIndicatorRightImageView;
 
 - (void)dealloc
 {
@@ -80,10 +71,7 @@
     
 	self.centerLabel.font = [UIFont rw_snapFontWithSize:18.0f];
     
-	self.snapButton.hidden = YES;
 	self.nextRoundButton.hidden = YES;
-	self.wrongSnapImageView.hidden = YES;
-	self.correctSnapImageView.hidden = YES;
     
 	[self hidePlayerLabels];
 	[self hideActivePlayerIndicator];
@@ -108,8 +96,8 @@
 
 - (IBAction)exitAction:(id)sender
 {
-	if (self.game.isServer)
-	{
+//	if (self.game.isServer)
+//	{
 		_alertView = [[UIAlertView alloc]
                       initWithTitle:NSLocalizedString(@"End Game?", @"Alert title (user is host)")
                       message:NSLocalizedString(@"This will terminate the game for all other players.", @"Alert message (user is host)")
@@ -119,77 +107,77 @@
                       nil];
         
 		[_alertView show];
-	}
-	else
-	{
-		_alertView = [[UIAlertView alloc]
-                      initWithTitle: NSLocalizedString(@"Leave Game?", @"Alert title (user is not host)")
-                      message:nil
-                      delegate:self
-                      cancelButtonTitle:NSLocalizedString(@"No", @"Button: No")
-                      otherButtonTitles:NSLocalizedString(@"Yes", @"Button: Yes"),
-                      nil];
-        
-		[_alertView show];
-	}
+//	}
+//	else
+//	{
+//		_alertView = [[UIAlertView alloc]
+//                      initWithTitle: NSLocalizedString(@"Leave Game?", @"Alert title (user is not host)")
+//                      message:nil
+//                      delegate:self
+//                      cancelButtonTitle:NSLocalizedString(@"No", @"Button: No")
+//                      otherButtonTitles:NSLocalizedString(@"Yes", @"Button: Yes"),
+//                      nil];
+//        
+//		[_alertView show];
+//	}
 }
 
-- (IBAction)turnOverPressed:(id)sender
-{
-	[self showTappedView];
-}
-
-- (IBAction)turnOverEnter:(id)sender
-{
-	[self showTappedView];
-}
-
-- (IBAction)turnOverExit:(id)sender
-{
-	[self hideTappedView];
-}
-
-- (IBAction)turnOverAction:(id)sender
-{
-	[self hideTappedView];
-	[self.game turnCardForPlayerAtBottom];
-}
-
-- (IBAction)snapAction:(id)sender
-{
-	[self.game playerCalledSnap:[self.game playerAtPosition:PlayerPositionBottom]];
-}
+//- (IBAction)turnOverPressed:(id)sender
+//{
+//	[self showTappedView];
+//}
+//
+//- (IBAction)turnOverEnter:(id)sender
+//{
+//	[self showTappedView];
+//}
+//
+//- (IBAction)turnOverExit:(id)sender
+//{
+//	[self hideTappedView];
+//}
+//
+//- (IBAction)turnOverAction:(id)sender
+//{
+//	[self hideTappedView];
+//	[self.game turnCardForPlayerAtBottom];
+//}
+//
+//- (IBAction)snapAction:(id)sender
+//{
+//	[self.game playerCalledSnap:[self.game playerAtPosition:PlayerPositionBottom]];
+//}
 
 - (IBAction)nextRoundAction:(id)sender
 {
 	[self.game nextRound];
 }
 
-- (void)showTappedView
-{
-	Player *player = [self.game playerAtPosition:PlayerPositionBottom];
-	Card *card = [player.closedCards topmostCard];
-	if (card != nil)
-	{
-		CardView *cardView = [self cardViewForCard:card];
-        
-		if (_tappedView == nil)
-		{
-			_tappedView = [[UIImageView alloc] initWithFrame:cardView.bounds];
-			_tappedView.backgroundColor = [UIColor clearColor];
-			_tappedView.image = [UIImage imageNamed:@"Darken"];
-			_tappedView.alpha = 0.6f;
-			[self.view addSubview:_tappedView];
-		}
-		else
-		{
-			_tappedView.hidden = NO;
-		}
-        
-		_tappedView.center = cardView.center;
-		_tappedView.transform = cardView.transform;
-	}
-}
+//- (void)showTappedView
+//{
+//	Player *player = [self.game playerAtPosition:PlayerPositionBottom];
+//	Card *card = [player.closedCards topmostCard];
+//	if (card != nil)
+//	{
+//		CardView *cardView = [self cardViewForCard:card];
+//        
+//		if (_tappedView == nil)
+//		{
+//			_tappedView = [[UIImageView alloc] initWithFrame:cardView.bounds];
+//			_tappedView.backgroundColor = [UIColor clearColor];
+//			_tappedView.image = [UIImage imageNamed:@"Darken"];
+//			_tappedView.alpha = 0.6f;
+//			[self.view addSubview:_tappedView];
+//		}
+//		else
+//		{
+//			_tappedView.hidden = NO;
+//		}
+//        
+//		_tappedView.center = cardView.center;
+//		_tappedView.transform = cardView.transform;
+//	}
+//}
 
 - (void)hideTappedView
 {
@@ -254,31 +242,30 @@
 		Player *player = [self.game playerAtPosition:p];
 		if (player != nil)
 		{
-			[self removeRemainingCardsFromStack:player.openCards forPlayer:player];
-			[self removeRemainingCardsFromStack:player.closedCards forPlayer:player];
+			
 		}
 	}
 }
 
-- (void)removeRemainingCardsFromStack:(Stack *)stack forPlayer:(Player *)player
-{
-	NSTimeInterval delay = 0.0f;
-    
-	for (int t = 0; t < [stack cardCount]; ++t)
-	{
-		NSUInteger index = [stack cardCount] - t - 1;
-		CardView *cardView = [self cardViewForCard:[stack cardAtIndex:index]];
-		if (t < 5)
-		{
-			[cardView animateRemovalAtRoundEndForPlayer:player withDelay:delay];
-			delay += 0.05f;
-		}
-		else
-		{
-			[cardView removeFromSuperview];
-		}
-	}
-}
+//- (void)removeRemainingCardsFromStack:(Stack *)stack forPlayer:(Player *)player
+//{
+//	NSTimeInterval delay = 0.0f;
+//    
+//	for (int t = 0; t < [stack cardCount]; ++t)
+//	{
+//		NSUInteger index = [stack cardCount] - t - 1;
+//		CardView *cardView = [self cardViewForCard:[stack cardAtIndex:index]];
+//		if (t < 5)
+//		{
+//			[cardView animateRemovalAtRoundEndForPlayer:player withDelay:delay];
+//			delay += 0.05f;
+//		}
+//		else
+//		{
+//			[cardView removeFromSuperview];
+//		}
+//	}
+//}
 
 - (void)game:(Game *)game playerDidDisconnect:(Player *)disconnectedPlayer redistributedCards:(NSDictionary *)redistributedCards
 {

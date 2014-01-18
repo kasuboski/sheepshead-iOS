@@ -6,6 +6,15 @@
 
 #import <Availability.h>
 
+typedef enum
+{
+	QuitReasonNoNetwork,          // no Wi-Fi or Bluetooth
+	QuitReasonConnectionDropped,  // communication failure with server
+	QuitReasonUserQuit,           // the user terminated the connection
+	QuitReasonServerQuit,         // the server quit the game (on purpose)
+}
+QuitReason;
+
 #ifndef __IPHONE_3_0
 #warning "This project uses features only available in iOS SDK 3.0 and later."
 #endif

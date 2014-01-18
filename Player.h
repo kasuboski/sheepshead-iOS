@@ -9,13 +9,25 @@
 #import <Foundation/Foundation.h>
 #import "Card.h"
 
+typedef enum
+{
+	PlayerPositionBottom,  // the user
+	PlayerPositionLeft,
+	PlayerPositionTop,
+	PlayerPositionRight
+}
+PlayerPosition;
+
 @interface Player : NSObject
+
+@property (nonatomic, assign) PlayerPosition position;
 @property (strong) NSMutableArray *hand;
 @property NSString* name;
 @property int points; //chip value
 @property int curTotal; //points from tricks
 @property BOOL picker; //if is picker
 @property int ID;
+@property (nonatomic, assign) int gamesWon;
 
 -(id) init: (NSString*) name :(int)ID;
 -(void) showHand;
