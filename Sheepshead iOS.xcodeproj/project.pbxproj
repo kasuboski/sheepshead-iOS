@@ -186,7 +186,7 @@
 		5800E01A187F648D0035DBAB /* Deck.m in Sources */ = {isa = PBXBuildFile; fileRef = 5800E013187F648D0035DBAB /* Deck.m */; };
 		5800E01B187F648D0035DBAB /* main2.m in Sources */ = {isa = PBXBuildFile; fileRef = 5800E014187F648D0035DBAB /* main2.m */; };
 		5800E01C187F648D0035DBAB /* Player.m in Sources */ = {isa = PBXBuildFile; fileRef = 5800E016187F648D0035DBAB /* Player.m */; };
-		5800E01D187F648D0035DBAB /* Table.m in Sources */ = {isa = PBXBuildFile; fileRef = 5800E018187F648D0035DBAB /* Table.m */; };
+		582A45B0188B21D600192EA7 /* Game.m in Sources */ = {isa = PBXBuildFile; fileRef = 582A45AF188B21D600192EA7 /* Game.m */; };
 		5835D02D1877773F007C4F3C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5835D02C1877773F007C4F3C /* Foundation.framework */; };
 		5835D02F1877773F007C4F3C /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5835D02E1877773F007C4F3C /* CoreGraphics.framework */; };
 		5835D0311877773F007C4F3C /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5835D0301877773F007C4F3C /* UIKit.framework */; };
@@ -401,8 +401,8 @@
 		5800E014187F648D0035DBAB /* main2.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main2.m; sourceTree = SOURCE_ROOT; };
 		5800E015187F648D0035DBAB /* Player.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Player.h; sourceTree = SOURCE_ROOT; };
 		5800E016187F648D0035DBAB /* Player.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Player.m; sourceTree = SOURCE_ROOT; };
-		5800E017187F648D0035DBAB /* Table.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Table.h; sourceTree = SOURCE_ROOT; };
-		5800E018187F648D0035DBAB /* Table.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Table.m; sourceTree = SOURCE_ROOT; };
+		582A45AE188B21D600192EA7 /* Game.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Game.h; sourceTree = SOURCE_ROOT; };
+		582A45AF188B21D600192EA7 /* Game.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Game.m; sourceTree = SOURCE_ROOT; };
 		5835D0291877773F007C4F3C /* Sheepshead iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Sheepshead iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5835D02C1877773F007C4F3C /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		5835D02E1877773F007C4F3C /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -653,8 +653,8 @@
 				5800E014187F648D0035DBAB /* main2.m */,
 				5800E015187F648D0035DBAB /* Player.h */,
 				5800E016187F648D0035DBAB /* Player.m */,
-				5800E017187F648D0035DBAB /* Table.h */,
-				5800E018187F648D0035DBAB /* Table.m */,
+				582A45AE188B21D600192EA7 /* Game.h */,
+				582A45AF188B21D600192EA7 /* Game.m */,
 			);
 			name = "Data Model";
 			sourceTree = "<group>";
@@ -1023,13 +1023,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				582A45B0188B21D600192EA7 /* Game.m in Sources */,
 				5800DEB4187F5FD00035DBAB /* GameViewController.m in Sources */,
 				5800DEB3187F5FD00035DBAB /* CardView.m in Sources */,
 				5800DEB6187F5FD00035DBAB /* UIFont+SnapAdditions.m in Sources */,
 				5800E019187F648D0035DBAB /* Card.m in Sources */,
 				5835D03D1877773F007C4F3C /* AppDelegate.m in Sources */,
 				5800E00F187F61260035DBAB /* MainViewController.m in Sources */,
-				5800E01D187F648D0035DBAB /* Table.m in Sources */,
 				5800E01C187F648D0035DBAB /* Player.m in Sources */,
 				5800DEB5187F5FD00035DBAB /* UIButton+SnapAdditions.m in Sources */,
 				5800E01A187F648D0035DBAB /* Deck.m in Sources */,

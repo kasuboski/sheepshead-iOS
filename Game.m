@@ -1,14 +1,14 @@
 //
-//  Table.m
+//  Game.m
 //  Sheepshead Obj-c
 //
 //  Created by Josh Kasuboski on 7/4/13.
 //  Copyright (c) 2013 Josh Kasuboski. All rights reserved.
 //
 
-#import "Table.h"
+#import "Game.h"
 
-@implementation Table
+@implementation Game
 
 @synthesize lastWin;
 

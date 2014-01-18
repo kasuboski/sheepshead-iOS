@@ -1,5 +1,5 @@
 //
-//  Table.h
+//  Game.h
 //  Sheepshead Obj-c
 //
 //  Created by Josh Kasuboski on 7/4/13.
@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "Deck.h"
 
-@interface Table : NSObject
+@interface Game : NSObject
 @property NSMutableArray* players;
 @property NSMutableArray* blind;
 @property NSMutableArray* currentPlay;//collection of cards currently in play
